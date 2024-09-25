@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="" alt="Logo">
+        </div>
+        <ul>
+            <li>
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{% url 'posts:list' %}">Post</a>
+            </li>
+
+            {% if user.is_authenticated %}
+            <li>
+                <form  class="logout" action="{% url 'users:logout' %}" method="post">
+                    {% csrf_token %}
+                    <input class="nav-link-input" type="submit" value="Logout" style="background: none; border: none;">
+                </form>
+            </li>
+
+            {% if user.is_superuser or user.is_staff %}
+            <li>
+                <a class="nav-link" href="/admin">Admin</a>
+            </li>
+            {% endif %}
+
+            <li>
+                <a class="nav-link" href="{% url 'posts:add-post' %}">Add Post</a>
+            </li>
+            {% else %}
+            <li>
+                <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+            </li>
+            {% endif %}
+            <li>
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+        </ul>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <footer class="footer">
+        <p>&copy; 2024. All Rights Reserved. Phegon Dev</p>
+    </footer>
+</body>
+</html>

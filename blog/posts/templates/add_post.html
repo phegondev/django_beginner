@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Create new Post</h2>
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                {{form.title}}
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                {{form.content}}
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                {{form.image}}
+            </div>
+            <button type="submit">Add Post</button>
+        </form>
+    </div>
+{% endblock %}

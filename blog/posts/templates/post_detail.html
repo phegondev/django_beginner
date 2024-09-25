@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="detail-title">{{post.title}}</h1>
+    <div class="detail-detail">
+        {% if post.image %}
+            <img src="{{post.image.url}}" alt="Post Image">
+        {% endif %}
+
+        <p class="detail-author">By {{post.author}} on {{post.created_at}}</p>
+        <div class="detail-content">
+            <p>{{post.content}}</p>
+        </div>
+    </div>
+{% endblock %}
